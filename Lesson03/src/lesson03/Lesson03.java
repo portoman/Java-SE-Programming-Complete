@@ -3,6 +3,7 @@ package lesson03;
 import java.math.BigDecimal;
 import java.math.RoundingMode;
 import java.text.NumberFormat;
+import java.text.ParseException;
 import java.time.Duration;
 import java.time.Instant;
 import java.time.LocalDate;
@@ -12,11 +13,14 @@ import java.time.Month;
 import java.time.Period;
 import java.time.ZoneId;
 import java.time.ZonedDateTime;
+import java.time.format.DateTimeFormatter;
+import java.time.format.FormatStyle;
 import java.util.Locale;
+import java.util.ResourceBundle;
 
 public class Lesson03 {
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws ParseException {
 
         /* Another way of handling text in Java is with java.lang.StringBuilder class.
         StringBuilder objects are mutable(the only one mutable till now), 
@@ -127,10 +131,60 @@ public class Lesson03 {
         Double tax2=0.2;
         int quantity=12345;
         
+        /* java.text.NumberFormat is used to parse and format numeric values*/
+        
         NumberFormat currencyFormat=NumberFormat.getCurrencyInstance(uk);
+        NumberFormat percentageFormat=NumberFormat.getPercentInstance(uk);
+        NumberFormat numberFormat=NumberFormat.getNumberInstance(uk);
         
+        String formattedPrice=currencyFormat.format(price2);
+        System.out.println("formattedPrice = " + formattedPrice);
         
+        String formattedTax=percentageFormat.format(tax2);
+        System.out.println("formattedTax = " + formattedTax);
+        
+        String formattedQuantity=numberFormat.format(quantity);
+        System.out.println("formattedQuantity = " + formattedQuantity);
+        
+        /*Inverse method*/
+        
+        BigDecimal p=BigDecimal.valueOf((Double)currencyFormat.parse("£2.99"));
+        System.out.println("p = " + p);
+        
+        Double t=(Double)percentageFormat.parse("12%");
+        System.out.println("t = " + t);
 
+        int q = numberFormat.parse("54,321").intValue();
+        System.out.println("q = " + q);
+        
+        /*java.time.format.DateTimeFormatter is used to parse and format date and time values*/
+        
+        LocalDate date3=LocalDate.of(2019, Month.MARCH,1);
+        DateTimeFormatter format=DateTimeFormatter.ofPattern("EEEE dd MMM yyyy", uk);
+        String result=date3.format(format);
+        
+        System.out.println("result = " + result);
+        
+        date3=LocalDate.parse("Tuesday 31 Mar 2020", format);
+        Locale ru=new Locale("ru");
+        format =DateTimeFormatter.ofLocalizedDate(FormatStyle.MEDIUM).localizedBy(ru);
+        result=date3.format(format);
+        System.out.println("result = " + result);
+        
+        /*java.util.ResourceBoundle class loads bundles and retrieves resources
+        -Resources bundles can be represented as plain text file with the extension .properties
+        
+        Locale locale3=new Locale("en", "GB");
+        ResourceBundle bundle=ResourceBundle.getBundle("resource.messages",locale3);
+        String helloPattern=bundle.getString("hello");
+        String otherMessage=bundle.getString("other");
+        */
+        
+        /*java.text.MessageFormat class substitutes values into message patterns
+        
+        
+        */
+        
     }
 
 }
