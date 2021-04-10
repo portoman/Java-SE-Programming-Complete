@@ -18,6 +18,7 @@ package labs.pm.data;
 
 import java.math.BigDecimal;
 import static java.math.RoundingMode.HALF_UP;
+import java.util.Objects;
 
 /**
  * {@code Product} class represents properties and behaviours of product objects
@@ -79,7 +80,7 @@ public class Product {
 
     }
 
-    //<editor-fold defaultstate="collapsed" desc="Constructor">
+//    <editor-fold defaultstate="collapsed" desc="Constructor">
     public Product() {
         this(0, "no name", BigDecimal.ZERO);
     }
@@ -105,11 +106,39 @@ public class Product {
     
       @Override
     public String toString() {
-        return "Product{" + "id=" + id + ", name=" + name + ", price=" + price + ", rating=" + rating + '}';
+        return id+", "+name+", "+price+", "+getDiscount()+", "+rating.getStars();
     
 //</editor-fold>
 //</editor-fold>
 
   
+    }
+
+    @Override
+    public int hashCode() {
+        int hash = 3;
+        hash = 41 * hash + this.id;
+        return hash;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        if (obj == null) {
+            return false;
+        }
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
+        final Product other = (Product) obj;
+        if (this.id != other.id) {
+            return false;
+        }
+        if (!Objects.equals(this.name, other.name)) {
+            return false;
+        }
+        return true;
     }
 }
