@@ -23,6 +23,9 @@ import java.time.LocalDate;
  *
  * @author portb
  */
+
+//We could put the classes with default visibility as the instance are going to be created from ProductManager class, and 
+//these classes are in the same package
 public class Food extends Product{
    
     private LocalDate bestBefore;
@@ -48,8 +51,20 @@ public class Food extends Product{
     }
 
     @Override
+    public BigDecimal getDiscount() {
+        return (this.bestBefore.isEqual(LocalDate.now()))?super.getDiscount():BigDecimal.ZERO;
+    }
+
+    
+    
+    @Override
     public String toString() {
         return super.toString()+", " + bestBefore;
+    }
+
+    @Override
+    public Product applyRating(Rating newRating) {
+        return new Food (getId(), getName(), getPrice(), newRating, bestBefore);
     }
     
     

@@ -32,7 +32,7 @@ import java.util.Objects;
  * @version 4.0
  * @author portb
  */
-public class Product {
+public abstract class Product {
 
 //<editor-fold defaultstate="collapsed" desc="Atributs">
     public static final BigDecimal DISCOUNT_RATE = BigDecimal.valueOf(0.1);
@@ -98,20 +98,19 @@ public class Product {
 
         this(id, name, price, Rating.NOT_RATED);
     }
-    
-    public Product applyRating(Rating newRating){
-        return new Product(this.id, this.name, this.price, newRating);
-        
-    }
-    
-      @Override
-    public String toString() {
-        return id+", "+name+", "+price+", "+getDiscount()+", "+rating.getStars();
-    
-//</editor-fold>
-//</editor-fold>
 
-  
+    public abstract Product applyRating(Rating newRating);
+//    {
+//        return new Product(this.id, this.name, this.price, newRating);
+//
+//    }
+
+    @Override
+    public String toString() {
+        return id + ", " + name + ", " + price + ", " + getDiscount() + ", " + rating.getStars();
+
+//</editor-fold>
+//</editor-fold>
     }
 
     @Override
@@ -126,19 +125,15 @@ public class Product {
         if (this == obj) {
             return true;
         }
-        if (obj == null) {
-            return false;
-        }
-        if (getClass() != obj.getClass()) {
-            return false;
-        }
+//        if (obj != null&& getClass() == obj.getClass()){
+            if(obj instanceof Product){
+
+
         final Product other = (Product) obj;
-        if (this.id != other.id) {
-            return false;
-        }
-        if (!Objects.equals(this.name, other.name)) {
-            return false;
-        }
-        return true;
+        return this.id == other.id && Objects.equals(this.name, other.name);
+
+    }
+
+return false;
     }
 }
