@@ -15,7 +15,7 @@ public class Ex_08_Bundle {
         */
         Locale locale=Locale.UK;
         
-        ResourceBundle msg=ResourceBundle.getBundle("messages",locale);
+        ResourceBundle msg=ResourceBundle.getBundle("lesson03.messages",locale);
         
         String offerPattern = msg.getString("offer");
         System.out.println("offerPattern = " + offerPattern);

@@ -20,22 +20,27 @@ package labs.pm.data;
  *
  * @author portb
  */
-public enum Rating {
-    NOT_RATED("\u2606\u2606\u2606\u2606\u2606"),
-    ONE_STAR("\u2605\u2606\u2606\u2606\u2606"),
-    TWO_STAR("\u2605\u2605\u2606\u2606\u2606"),
-    THREE_STAR("\u2605\u2605\u2605\u2606\u2606"),
-    FOUR_STAR("\u2605\u2605\u2605\u2605\u2606"),
-    FIVE_STAR("\u2605\u2605\u2605\u2605\u2605"),;
+public class Review {
 
-    private String stars;
+    private Rating rating;
+    private String comments;
 
-    private Rating(String stars) {
-        this.stars = stars;
+    public Review(Rating rating, String comments) {
+        this.rating = rating;
+        this.comments = comments;
     }
 
-    public String getStars() {
-        return stars;
+    public Rating getRating() {
+        return rating;
+    }
+
+    public String getComments() {
+        return comments;
+    }
+
+    @Override
+    public String toString() {
+        return "Review{" + "rating=" + rating + ", comments=" + comments + '}';
     }
 
 }

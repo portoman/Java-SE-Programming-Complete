@@ -20,22 +20,24 @@ package labs.pm.data;
  *
  * @author portb
  */
-public enum Rating {
-    NOT_RATED("\u2606\u2606\u2606\u2606\u2606"),
-    ONE_STAR("\u2605\u2606\u2606\u2606\u2606"),
-    TWO_STAR("\u2605\u2605\u2606\u2606\u2606"),
-    THREE_STAR("\u2605\u2605\u2605\u2606\u2606"),
-    FOUR_STAR("\u2605\u2605\u2605\u2605\u2606"),
-    FIVE_STAR("\u2605\u2605\u2605\u2605\u2605"),;
+//Interface with Generic reference<T> as we don´t know to which classes will be implemented yet
+@FunctionalInterface
+public interface Rateable<T> {
 
-    private String stars;
+    public static final Rating DEFAULT_RATING = Rating.NOT_RATED;
 
-    private Rating(String stars) {
-        this.stars = stars;
+    T applyRating(Rating rating);
+
+    public default T applying(int stars){
+        return applyRating(Rateable.convert(stars));
+    }
+    public default Rating getRating() {
+        return DEFAULT_RATING;
     }
 
-    public String getStars() {
-        return stars;
+    public static Rating convert(int stars) {
+        return (stars>=0 && stars<=5)?Rating.values()[stars]:DEFAULT_RATING;
+
     }
 
 }

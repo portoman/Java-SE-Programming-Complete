@@ -18,6 +18,7 @@ package labs.pm.data;
 
 import java.math.BigDecimal;
 import static java.math.RoundingMode.HALF_UP;
+import java.time.LocalDate;
 import java.util.Objects;
 
 /**
@@ -32,8 +33,9 @@ import java.util.Objects;
  * @version 4.0
  * @author portb
  */
-public abstract class Product {
+public abstract class Product implements Rateable<Product>{
 
+     private LocalDate bestBefore=LocalDate.now();
 //<editor-fold defaultstate="collapsed" desc="Atributs">
     public static final BigDecimal DISCOUNT_RATE = BigDecimal.valueOf(0.1);
     private int id;
@@ -69,6 +71,7 @@ public abstract class Product {
         this.price = price;
     }
 
+    @Override
     public Rating getRating() {
         return rating;
     }
@@ -98,13 +101,16 @@ public abstract class Product {
 
         this(id, name, price, Rating.NOT_RATED);
     }
-
-    public abstract Product applyRating(Rating newRating);
+//      This method comes from the Rateable interface, created afterwards,  so it can be hidden
+//    public abstract Product applyRating(Rating newRating);
 //    {
 //        return new Product(this.id, this.name, this.price, newRating);
 //
 //    }
 
+      public LocalDate getBestBefore() {
+        return bestBefore;
+    }
     @Override
     public String toString() {
         return id + ", " + name + ", " + price + ", " + getDiscount() + ", " + rating.getStars();
