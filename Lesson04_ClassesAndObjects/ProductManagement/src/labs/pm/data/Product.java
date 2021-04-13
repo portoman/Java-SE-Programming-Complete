@@ -33,9 +33,9 @@ import java.util.Objects;
  * @version 4.0
  * @author portb
  */
-public abstract class Product implements Rateable<Product>{
+public abstract class Product implements Rateable<Product> {
 
-     private LocalDate bestBefore=LocalDate.now();
+    private LocalDate bestBefore = LocalDate.now();
 //<editor-fold defaultstate="collapsed" desc="Atributs">
     public static final BigDecimal DISCOUNT_RATE = BigDecimal.valueOf(0.1);
     private int id;
@@ -108,9 +108,10 @@ public abstract class Product implements Rateable<Product>{
 //
 //    }
 
-      public LocalDate getBestBefore() {
+    public LocalDate getBestBefore() {
         return bestBefore;
     }
+
     @Override
     public String toString() {
         return id + ", " + name + ", " + price + ", " + getDiscount() + ", " + rating.getStars();
@@ -132,14 +133,13 @@ public abstract class Product implements Rateable<Product>{
             return true;
         }
 //        if (obj != null&& getClass() == obj.getClass()){
-            if(obj instanceof Product){
+        if (obj instanceof Product) {
 
+            final Product other = (Product) obj;
+            return this.id == other.id;// && Objects.equals(this.name, other.name);
 
-        final Product other = (Product) obj;
-        return this.id == other.id && Objects.equals(this.name, other.name);
+        }
 
-    }
-
-return false;
+        return false;
     }
 }
