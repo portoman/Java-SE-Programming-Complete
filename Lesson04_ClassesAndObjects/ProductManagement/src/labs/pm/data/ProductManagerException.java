@@ -16,30 +16,18 @@
  */
 package labs.pm.data;
 
-import java.math.BigDecimal;
-import java.time.LocalTime;
-
 /**
  *
  * @author portb
  */
-public class Drink extends Product {
-
-    public Drink(int id, String name, BigDecimal price, Rating rating) {
-        super(id, name, price, rating);
+public class ProductManagerException extends Exception{
+    public ProductManagerException(){
+        super();
     }
-
-    @Override
-    public BigDecimal getDiscount() {
-        LocalTime now = LocalTime.now();
-        return (now.isBefore(LocalTime.of(18, 30)) 
-                && now.isAfter(LocalTime.of(17, 30))) 
-                ? super.getDiscount() : BigDecimal.ZERO;
-
+    public ProductManagerException(String message){
+        super(message);
     }
-
-    @Override
-    public Product applyRating(Rating newRating) {
-        return new Drink(getId(), getName(), getPrice(), newRating);
+    public ProductManagerException(String message, Throwable cause){
+        super(message, cause);
     }
 }
