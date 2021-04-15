@@ -1,6 +1,7 @@
-Tea, Price:$1.99, Rating:★★★☆☆, Best Before: 4/14/21
-Review: ★★★★★	Fine tea
-Review: ★★★★☆	Rather weak tea
-Review: ★★☆☆☆	Nice hot cup of tea
-Review: ★★☆☆☆	Not very good
-Review: ★★☆☆☆	Just add some sugar
+Tea, Price:£1.99, Rating:☆☆☆☆☆, Best Before: 15/04/2021
+Not reviewed
+��★	The greatest tea I have ever drunk
+Review: ★★★★☆	Nice hot cup of tea
+Review: ★★★☆☆	It´s ok tea
+Review: ★★☆☆☆	Not bad
+Review: ★☆☆☆☆	Not good
